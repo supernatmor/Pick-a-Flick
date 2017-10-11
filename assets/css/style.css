@@ -8,18 +8,18 @@ body {
 #userInput {
 	background: #7f7f7f;
 	color: white;
-	border-radius: 2px;
+	border-radius: 4px;
 	height: 400px;
 }
 
 #outputBox {
 	background: #7f7f7f;
-	border-radius: 2px;
+	border-radius: 4px;
 	height: 400px;
 }
 
 .jumbotron {
-	background: #880015;
+	background: #7F2626;
 	color: white;
 	text-align: center;
 }
@@ -27,10 +27,10 @@ body {
 .card {
 	float: left;
 	height: 375px;
-	background: #880015;
+	background: #7F2626;
 	border-style: solid;
 	border-width: 10px;
-	border-color: #ad0000;
+	border-color: #CC0000;
 	margin-left: 40px;
 	margin-top: 10px
 
@@ -46,7 +46,7 @@ body {
 	margin-top: 15px;
 	border-style: solid;
 	border-width: 5px;
-	border-color: #ad0000;
+	border-color: #CC0000;
 	border-spacing: 5px;
 
 }

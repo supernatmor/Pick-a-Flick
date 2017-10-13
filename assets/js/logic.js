@@ -2,6 +2,8 @@ $(document).ready(function () {
   console.log("ready");
 });
 
+var title = "";
+
 // Initialize Firebase
 
 var config = {
@@ -16,6 +18,8 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
+
+var dataDB = database.ref("data");
 
 // Grab user input  
 $(".venPick a").on("click", function () {
@@ -41,25 +45,22 @@ $(".search").on("click", function () {
   firebaseStorage();
 });
 
-
-
 // Store in firebase
 
 function firebaseStorage() {
-  database.ref().push({
+  dataDB.push({
     venue: venueChoice,
     genre: genreChoice,
     rating: ratingChoice,
     score: scoreChoice
   });
-  run();
 }
 
 // Ajax call to grab movies from OMBD API
 
-var queryURL = "https://www.omdbapi.com/?t=Goodfellas&plot=short&apikey=40e9cece";
+function run(counter) {
 
-function run() {
+  var queryURL = "https://www.omdbapi.com/?t=" + title + "&plot=short&apikey=40e9cece";
 
   $.ajax({
     url: queryURL,
@@ -87,44 +88,61 @@ function run() {
     console.log(score);
     console.log(runTime);
 
-    $("#card1 .card-img-top").attr("src", imgURL);
-    $("#card1 #plot").text(plot);
-    $("#card1 #rating").text(rating);
-    $("#card1 #score").text(score);
-    $("#card1 #length").text(runTime);
-
-    // $(Rating).text(rating);
-    // $(Score).text(score);
-    // $(RunTime).text(runTime);
+    $("#card" + (counter + 1) + " .card-img-top").attr("src", imgURL);
+    $("#card" + (counter + 1) + " #plot").text(plot);
+    $("#card" + (counter + 1) + " #score").text(score);
+    $("#card" + (counter + 1) + " #length").text(runTime);
+    $("#card" + (counter + 1) + " #rating").text(rating);
 
     // Determine if correct parameters 
-
-    // if (genreChoice === genre && rating === ratingChoice && scoreChoice < score) {
-
-    //   // Diplay results
-
-    //   for (var i = 0; i < 3; i++) {
-
-    //     var imgDiv = $("<img class='poster'>");
-
-    //     imgDiv.append(imgURL);
-    //     $(POSTER).append(imgDiv);
-    //     $(TITLE).append(title);
-    //     $(SCORE).append(score);
-    //     $(RUNTIME).append(runTime);
-    //     $(PLOT).append(plot);
-    //   } else {
-
-    //     // Rerun the function if movie doesn't match parameters
-
-    //     run();
-    //   }
-
-    // }
 
   });
 
 }
+
+// Grab a random movie title 
+
+dataDB.on("child_added", function (snapshot) {
+
+  // Grab chosen genre and assign search id
+
+  var chosenGenre = snapshot.val().genre;
+
+  if (chosenGenre === "Action") {
+    var genreID = 28;
+  } else if (chosenGenre === "Comedy") {
+    var genreID = 35;
+  } else if (chosenGenre === "Horror") {
+    var genreID = 27;
+  } else if (chosenGenre === "Romance") {
+    var genreID = 10749;
+  } else if (chosenGenre === "Sci-Fi") {
+    var genreID = 878;
+  }
+
+
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://api.themoviedb.org/3/genre/" + genreID + "/movies?sort_by=created_at.asc&include_adult=false&language=en-US&api_key=c46142c3f1b1cbfb5aa59c22ce677737",
+    "method": "GET",
+    "headers": {},
+    "data": "{}"
+  }
+
+  $.ajax(settings).done(function (response2) {
+    console.log(response2);
+
+    for (var i = 0; i < 3; i++) {
+      title = response2.results[i].original_title;
+
+      console.log(title);
+      var counter = i;
+      run(counter);
+    }
+  });
+
+});
 
 // // Click event for movie selection
 

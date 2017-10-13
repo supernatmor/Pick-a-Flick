@@ -9,6 +9,7 @@ body {
     background-size: 100% 100%;
 }
 
+
 .userInput {
 	color: white;
 	padding: 10px;
@@ -27,7 +28,7 @@ body {
 
 .card {
 	
-	height: 375px;
+	max-height: 500px;
 	background: #7F2626;
 	border-style: solid;
 	border-width: 10px;

@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 body {
 	background-image: url(../images/altbg.jpg);
 	background-repeat: no-repeat;
@@ -5,35 +9,31 @@ body {
     background-size: 100% 100%;
 }
 
-#userInput {
-	background: #7f7f7f;
+.userInput {
 	color: white;
-	border-radius: 4px;
-	height: 200px;
+	padding: 10px;
 }
 
-#outputBox {
-	background: #7f7f7f;
-	border-radius: 4px;
-	height: 400px;
+
+.outputBox {
 }
 
 .jumbotron {
 	background: #7F2626;
 	color: white;
 	text-align: center;
+	box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
 }
 
 .card {
-	float: left;
+	
 	height: 375px;
 	background: #7F2626;
 	border-style: solid;
 	border-width: 10px;
 	border-color: #CC0000;
-	margin-left: 40px;
-	margin-top: 10px
-
+	margin: 10px;
+	box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
 }
 
 .card-img-top {
@@ -43,7 +43,7 @@ body {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 15px;
+	margin-top: 10px;
 	border-style: solid;
 	border-width: 5px;
 	border-color: #CC0000;
@@ -53,26 +53,41 @@ body {
 
 .card-text {
 	color: white;
-	padding-left: 2px;
-	padding-right: 2px;
+	padding-left: 12px;
+	padding-right: 12px;
 	margin-top: 10px
+	line-height: 18px;
 
 }
 
 .btn-danger {
-	background: #7F2626;
+	background: #CC0000;
 	color: white;
-	text-align: center
+	text-align: center;
+	box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
 
+	
 }
 
 .btn {
-	margin-top: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .dropdown-item {
 	background: #7F2626;
 	color: white;
 	text-align: center
+
+}
+
+@media (min-width: 992px){
+.userInput {
+    width: 200px;
+}
+
+
+
+
 
 }

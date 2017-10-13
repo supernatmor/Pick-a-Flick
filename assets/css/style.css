@@ -12,19 +12,24 @@ body {
 .userInput {
 	color: white;
 	padding: 10px;
+	margin-top: 20px;
 }
 
-.outputBox {}
+.outputBox {
+	margin-top: 20px;
+}
 
-.jumbotron {
-	background: #7F2626;
+.title {
 	color: white;
 	text-align: center;
-	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+	font-size: 100px;
+	text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+
+	
 }
 
 .card {
-	height: 375px;
+	max-height: 500px;
 	background: #7F2626;
 	border-style: solid;
 	border-width: 10px;

@@ -18,71 +18,82 @@
         </div>
         <div class="row content">
             <div id="userInput" class="col-md-3">
-                <div class="dropdown">
-                    <button class="btn btn-danger dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">Stay In or Go Out?
-                        <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li class="venPick"><a><span class="glyphicon glyphicon-film" aria-bed="true"> &nbsp</span>In</a></li>
-                        <li class="venPick"><a><span class="glyphicon glyphicon-road" aria-bed="true"> &nbsp</span>Out</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-danger dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">Genre
-                        <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li class="genPick"><a>Action</a></li>
-                        <li class="genPick"><a>Comedy</a></li>
-                        <li class="genPick"><a>Horror</a></li>
-                        <li class="genPick"><a>Romance</a></li>
-                        <li class="genPick"><a>Sci-Fi</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-danger dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">Rating
-                        <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li class="ratePick"><a>G</a></li>
-                        <li class="ratePick"><a>PG</a></li>
-                        <li class="ratePick"><a>PG-13</a></li>
-                        <li class="ratePick"><a>R</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-danger dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">Score
-                        <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li class="scorePick"><a>50%+</a></li>
-                        <li class="scorePick"><a>75%+</a></li>
-                        <li class="scorePick"><a>90%+</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-1">
-                <!--spacer column-->
-            </div>
-            <div id="outputBox" class="col-md-8">
-                
-                <div class="card col-md-4" style="width: 30rem;">
-                    <img class="card-img-top mx-auto" src="assets/images/film.png " alt="Card image cap ">
-                    <div class="card-body ">
-                        <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel veritatis dicta, minus dignissimos illo quasi porro sint adipisci, fugit nisi saepe vero!</p>
+                <div class="userInput">
+                    <div class="dropdown">
+                        <button class="btn btn-danger dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">Stay In or Go Out?
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li class="venPick"><a><span class="glyphicon glyphicon-bed" aria-bed="true"> &nbsp</span>In</a></li>
+                            <li class="venPick"><a><span class="glyphicon glyphicon-road" aria-bed="true"> &nbsp</span>Out</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-danger dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">Genre
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li class="genPick"><a>Action</a></li>
+                            <li class="genPick"><a>Comedy</a></li>
+                            <li class="genPick"><a>Horror</a></li>
+                            <li class="genPick"><a>Romance</a></li>
+                            <li class="genPick"><a>Sci-Fi</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-danger dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">Rating
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li class="ratePick"><a>G</a></li>
+                            <li class="ratePick"><a>PG</a></li>
+                            <li class="ratePick"><a>PG-13</a></li>
+                            <li class="ratePick"><a>R</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-danger dropdown-toggle" style="width: 100%" type="button" data-toggle="dropdown">Score
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li class="scorePick"><a>50%+</a></li>
+                            <li class="scorePick"><a>75%+</a></li>
+                            <li class="scorePick"><a>90%+</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-md-2">
-                    <!--spacer column-->
-                </div>
-                <div class="card col-md-4" style="width: 30rem;">
-                    <img class="card-img-top " src="assets/images/film.png " alt="Card image cap ">
-                    <div class="card-body ">
-                        <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus necessitatibus dicta nesciunt excepturi suscipit. Eaque quasi a aut dignissimos! </p>
+            </div>
+            <div id="outputBox" class="col-md-9">
+                <div class="outputBox">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card">
+                                <img class="card-img-top mx-auto" src="assets/images/film.png " alt="Card image cap ">
+                                <div class="card-body ">
+                                    <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel veritatis dicta, minus dignissimos illo quasi porro sint adipisci, fugit nisi saepe vero!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card">
+                                <img class="card-img-top mx-auto" src="assets/images/film.png " alt="Card image cap ">
+                                <div class="card-body ">
+                                    <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel veritatis dicta, minus dignissimos illo quasi porro sint adipisci, fugit nisi saepe vero!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card">
+                                <img class="card-img-top mx-auto" src="assets/images/film.png " alt="Card image cap ">
+                                <div class="card-body ">
+                                    <p class="card-text ">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel veritatis dicta, minus dignissimos illo quasi porro sint adipisci, fugit nisi saepe vero!</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
             </div>
         </div>
     </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js "></script>
     <script src="assets/js/logic.js "></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
 </body>
 
 </html>

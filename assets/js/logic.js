@@ -18,7 +18,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // Grab user input  
-$(".venPick a").on("click", function venue() {
+$(".venPick a").on("click", function () {
   venueChoice = $(this).text().trim();
   console.log(venueChoice);
 });
@@ -33,6 +33,11 @@ $(".ratePick a").on("click", function () {
 $(".scorePick a").on("click", function () {
   scoreChoice = $(this).text().trim();
   console.log(scoreChoice);
+});
+
+// Search event
+
+$(".search").on("click", function () {
   firebaseStorage();
 });
 
@@ -82,8 +87,12 @@ function run() {
     console.log(score);
     console.log(runTime);
 
-    $(".card-img-top").attr("src", imgURL);
-    $(".card-text").text(plot);
+    $("#card1 .card-img-top").attr("src", imgURL);
+    $("#card1 #plot").text(plot);
+    $("#card1 #rating").text(rating);
+    $("#card1 #score").text(score);
+    $("#card1 #length").text(runTime);
+
     // $(Rating).text(rating);
     // $(Score).text(score);
     // $(RunTime).text(runTime);

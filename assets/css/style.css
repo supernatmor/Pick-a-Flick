@@ -5,8 +5,8 @@
 body {
 	background-image: url(../images/altbg.jpg);
 	background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
+	background-attachment: fixed;
+	background-size: 100% 100%;
 }
 
 
@@ -15,26 +15,28 @@ body {
 	padding: 10px;
 }
 
-
-.outputBox {
-}
+.outputBox {}
 
 .jumbotron {
 	background: #7F2626;
 	color: white;
 	text-align: center;
-	box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
+	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
 }
 
 .card {
+<<<<<<< HEAD
 	
 	max-height: 500px;
+=======
+	height: 375px;
+>>>>>>> 603b0ff26a68f5b1ba2c89ccbee9cbfcc3321850
 	background: #7F2626;
 	border-style: solid;
 	border-width: 10px;
 	border-color: #CC0000;
 	margin: 10px;
-	box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
+	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
 }
 
 .card-img-top {
@@ -49,25 +51,20 @@ body {
 	border-width: 5px;
 	border-color: #CC0000;
 	border-spacing: 5px;
-
 }
 
 .card-text {
 	color: white;
 	padding-left: 12px;
 	padding-right: 12px;
-	margin-top: 10px
-	line-height: 18px;
-
+	margin-top: 10px line-height: 18px;
 }
 
 .btn-danger {
 	background: #CC0000;
 	color: white;
 	text-align: center;
-	box-shadow: 10px 10px 5px rgba(0,0,0,0.5);
-
-	
+	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
 }
 
 .btn {
@@ -79,16 +76,10 @@ body {
 	background: #7F2626;
 	color: white;
 	text-align: center
-
 }
 
-@media (min-width: 992px){
-.userInput {
-    width: 200px;
-}
-
-
-
-
-
+@media (min-width: 992px) {
+	.userInput {
+		width: 200px;
+	}
 }

@@ -25,12 +25,7 @@ body {
 }
 
 .card {
-<<<<<<< HEAD
-	
 	max-height: 500px;
-=======
-	height: 375px;
->>>>>>> 603b0ff26a68f5b1ba2c89ccbee9cbfcc3321850
 	background: #7F2626;
 	border-style: solid;
 	border-width: 10px;

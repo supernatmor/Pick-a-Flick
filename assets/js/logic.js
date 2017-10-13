@@ -2,7 +2,8 @@ $(document).ready(function () {
   console.log("ready");
 });
 
-var title = "";
+// var title = "";
+var globalRandom = 0;
 
 // Initialize Firebase
 
@@ -58,7 +59,7 @@ function firebaseStorage() {
 
 // Ajax call to grab movies from OMBD API
 
-function run(counter) {
+function run(counter, title) {
 
   var queryURL = "https://www.omdbapi.com/?t=" + title + "&plot=short&apikey=40e9cece";
 
@@ -134,11 +135,18 @@ dataDB.on("child_added", function (snapshot) {
     console.log(response2);
 
     for (var i = 0; i < 3; i++) {
-      title = response2.results[i].original_title;
-
-      console.log(title);
-      var counter = i;
-      run(counter);
+      var random = Math.floor(Math.random() * 19);
+      console.log(random);
+      if (globalRandom != random) {
+        var title = response2.results[random].original_title;
+        console.log(title);
+        var counter = i;
+        globalRandom = random;
+        run(counter, title);
+      } else {
+        i--;
+        var random = Math.floor(Math.random() * 19);
+      }
     }
   });
 

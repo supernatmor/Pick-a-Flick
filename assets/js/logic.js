@@ -1,5 +1,5 @@
-$(document).ready(function () {
-  console.log("ready");
+$(document).ready(function() {
+    console.log("ready");
 });
 
 // var title = "";
@@ -8,12 +8,12 @@ var globalRandom = 0;
 // Initialize Firebase
 
 var config = {
-  apiKey: "AIzaSyC1_ZohEq6qS79WnJgg3WwW_QXOW_Ez_TA",
-  authDomain: "deh2-6f6cf.firebaseapp.com",
-  databaseURL: "https://deh2-6f6cf.firebaseio.com",
-  projectId: "deh2-6f6cf",
-  storageBucket: "deh2-6f6cf.appspot.com",
-  messagingSenderId: "482010970500"
+    apiKey: "AIzaSyC1_ZohEq6qS79WnJgg3WwW_QXOW_Ez_TA",
+    authDomain: "deh2-6f6cf.firebaseapp.com",
+    databaseURL: "https://deh2-6f6cf.firebaseio.com",
+    projectId: "deh2-6f6cf",
+    storageBucket: "deh2-6f6cf.appspot.com",
+    messagingSenderId: "482010970500"
 };
 
 firebase.initializeApp(config);
@@ -23,134 +23,156 @@ var database = firebase.database();
 var dataDB = database.ref("data");
 
 // Grab user input  
-$(".venPick a").on("click", function () {
-  venueChoice = $(this).text().trim();
-  console.log(venueChoice);
+$(".venPick a").on("click", function() {
+    venueChoice = $(this).text().trim();
+    console.log(venueChoice);
+    $("#venue").html($(this).text().trim()).css("background", "#7f2626").css("border-color", "#7f2626").off("click");
+    $(".venPick").off("click");
 });
-$(".genPick a").on("click", function () {
-  genreChoice = $(this).text().trim();
-  console.log(genreChoice);
+$(".genPick a").on("click", function() {
+    genreChoice = $(this).text().trim();
+    console.log(genreChoice);
+    $("#gen").html($(this).text().trim()).css("background", "#7f2626").css("border-color", "#7f2626").off("click");
 });
-$(".ratePick a").on("click", function () {
-  ratingChoice = $(this).text().trim();
-  console.log(ratingChoice);
+$(".ratePick a").on("click", function() {
+    ratingChoice = $(this).text().trim();
+    console.log(ratingChoice);
+    $("#rate").html($(this).text().trim()).css("background", "#7f2626").css("border-color", "#7f2626").off("click");
 });
-$(".scorePick a").on("click", function () {
-  scoreChoice = $(this).text().trim();
-  console.log(scoreChoice);
+$(".scorePick a").on("click", function() {
+    scoreChoice = $(this).text().trim();
+    console.log(scoreChoice);
+    $("#score").html($(this).text().trim()).css("background", "#7f2626").css("border-color", "#7f2626").off("click");
 });
+
+// Clear Button
+$("#clear").on("click", function() {
+    $("#venue").html("Stay In/Go Out?").css("background", "#CC0000").css("border-color", "#CC0000");
+    $("#gen").html("Genre").css("background", "#CC0000").css("border-color", "#CC0000");
+    $("#rate").html("Rating").css("background", "#CC0000").css("border-color", "#CC0000");
+    $("#score").html("Score").css("background", "#CC0000").css("border-color", "#CC0000");
+    $("#search").on("click", function() {
+      firebaseStorage();
+    });
+    $(".search").on("click", function() {
+      firebaseStorage();
+    });
+})
+
 
 // Search event
 
-$(".search").on("click", function () {
-  firebaseStorage();
+$(".search").on("click", function() {
+    firebaseStorage();
+    $("#search").off("click");
+    $(".search").off("click");
 });
 
 // Store in firebase
 
 function firebaseStorage() {
-  dataDB.push({
-    venue: venueChoice,
-    genre: genreChoice,
-    rating: ratingChoice,
-    score: scoreChoice
-  });
+    dataDB.push({
+        venue: venueChoice,
+        genre: genreChoice,
+        rating: ratingChoice,
+        score: scoreChoice
+    });
 }
 
 // Ajax call to grab movies from OMBD API
 
 function run(counter, title) {
 
-  var queryURL = "https://www.omdbapi.com/?t=" + title + "&plot=short&apikey=40e9cece";
+    var queryURL = "https://www.omdbapi.com/?t=" + title + "&plot=short&apikey=40e9cece";
 
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).done(function (response) {
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).done(function(response) {
 
-    console.log(response);
+        console.log(response);
 
-    // Set variables
+        // Set variables
 
-    var title = response.Title;
-    var plot = response.Plot;
-    var rating = response.Rated;
-    var genre = response.Genre;
-    var released = response.Released;
-    var imgURL = response.Poster;
-    var score = response.Ratings[1].Value;
-    var runTime = response.Runtime;
+        var title = response.Title;
+        var plot = response.Plot;
+        var rating = response.Rated;
+        var genre = response.Genre;
+        var released = response.Released;
+        var imgURL = response.Poster;
+        var score = response.Ratings[1].Value;
+        var runTime = response.Runtime;
 
-    console.log(title);
-    console.log(plot);
-    console.log(rating);
-    console.log(released);
-    console.log(imgURL);
-    console.log(score);
-    console.log(runTime);
+        console.log(title);
+        console.log(plot);
+        console.log(rating);
+        console.log(released);
+        console.log(imgURL);
+        console.log(score);
+        console.log(runTime);
 
-    $(".customText").remove();
+        $(".customText").remove();
 
-    $("#card" + (counter + 1) + " .card-img-top").attr("src", imgURL);
-    $("#card" + (counter + 1) + " #plot").text(plot);
-    $("#card" + (counter + 1) + " #score").text(score);
-    $("#card" + (counter + 1) + " #length").text(runTime);
-    $("#card" + (counter + 1) + " #rating").text(rating);
+        $("#card" + (counter + 1) + " .card-img-top").attr("src", imgURL);
+        $("#card" + (counter + 1) + " #plot").text(plot);
+        $("#card" + (counter + 1) + " #score").text(score);
+        $("#card" + (counter + 1) + " #length").text(runTime);
+        $("#card" + (counter + 1) + " #rating").text(rating);
 
-    // Determine if correct parameters 
+        // Determine if correct parameters 
 
-  });
+    });
 
 }
 
 // Grab a random movie title 
 
-dataDB.on("child_added", function (snapshot) {
+dataDB.on("child_added", function(snapshot) {
 
-  // Grab chosen genre and assign search id
+    // Grab chosen genre and assign search id
 
-  var chosenGenre = snapshot.val().genre;
+    var chosenGenre = snapshot.val().genre;
 
-  if (chosenGenre === "Action") {
-    var genreID = 28;
-  } else if (chosenGenre === "Comedy") {
-    var genreID = 35;
-  } else if (chosenGenre === "Horror") {
-    var genreID = 27;
-  } else if (chosenGenre === "Romance") {
-    var genreID = 10749;
-  } else if (chosenGenre === "Sci-Fi") {
-    var genreID = 878;
-  }
-
-
-  var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://api.themoviedb.org/3/genre/" + genreID + "/movies?sort_by=created_at.asc&include_adult=false&language=en-US&api_key=c46142c3f1b1cbfb5aa59c22ce677737",
-    "method": "GET",
-    "headers": {},
-    "data": "{}"
-  }
-
-  $.ajax(settings).done(function (response2) {
-    console.log(response2);
-
-    for (var i = 0; i < 3; i++) {
-      var random = Math.floor(Math.random() * 19);
-      console.log(random);
-      if (globalRandom != random) {
-        var title = response2.results[random].original_title;
-        console.log(title);
-        var counter = i;
-        globalRandom = random;
-        run(counter, title);
-      } else {
-        i--;
-        var random = Math.floor(Math.random() * 19);
-      }
+    if (chosenGenre === "Action") {
+        var genreID = 28;
+    } else if (chosenGenre === "Comedy") {
+        var genreID = 35;
+    } else if (chosenGenre === "Horror") {
+        var genreID = 27;
+    } else if (chosenGenre === "Romance") {
+        var genreID = 10749;
+    } else if (chosenGenre === "Sci-Fi") {
+        var genreID = 878;
     }
-  });
+
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.themoviedb.org/3/genre/" + genreID + "/movies?sort_by=created_at.asc&include_adult=false&language=en-US&api_key=c46142c3f1b1cbfb5aa59c22ce677737",
+        "method": "GET",
+        "headers": {},
+        "data": "{}"
+    }
+
+    $.ajax(settings).done(function(response2) {
+        console.log(response2);
+
+        for (var i = 0; i < 3; i++) {
+            var random = Math.floor(Math.random() * 19);
+            console.log(random);
+            if (globalRandom != random) {
+                var title = response2.results[random].original_title;
+                console.log(title);
+                var counter = i;
+                globalRandom = random;
+                run(counter, title);
+            } else {
+                i--;
+                var random = Math.floor(Math.random() * 19);
+            }
+        }
+    });
 
 });
 

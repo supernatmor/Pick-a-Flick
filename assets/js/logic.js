@@ -26,8 +26,8 @@ var dataDB = database.ref("data");
 $(".venPick a").on("click", function() {
     venueChoice = $(this).text().trim();
     console.log(venueChoice);
-    $("#venue").html($(this).text().trim()).css("background", "#7f2626").css("border-color", "#7f2626").off("click");
-    $(".venPick").off("click");
+    $("#venue").html($(this).text().trim()).css("background", "#7f2626").css("border-color", "#7f2626").off(click);
+    $(".venPick").off(click);
 });
 $(".genPick a").on("click", function() {
     genreChoice = $(this).text().trim();

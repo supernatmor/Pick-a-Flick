@@ -3,11 +3,19 @@
 
 <head>
     <title>Pick a Flick</title>
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
     <<!-- Latest compiled and minified CSS & JS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <style type="text/css">
+        #test {
+            background: white;
+            height: 150px;
+            width: 250px;
+        }
+        </style>
 </head>
 
 <body>
@@ -18,17 +26,18 @@
             </div>
         </div>
         <div class="row content">
-            <div id="userInput" class="col-md-2">
+            <div id="userInput" class="col-md-3 col-lg-2">
                 <div class="userInput">
+                    
                     <div class="dropdown">
-                        <button class="btn btn-danger dropdown-toggle" id="venue" style="width: 100%" type="button" data-toggle="dropdown">Stay In/Go Out?</button>
+                        <button class="btn btn-danger dropdown-toggle hvr-grow" id="venue" style="width: 100%" type="button" data-toggle="dropdown">Stay In/Go Out?</button>
                         <ul class="dropdown-menu">
                             <li class="venPick"><a>In</a></li>
                             <li class="venPick"><a>Out</a></li>
                         </ul>
                     </div>
                     <div class="dropdown">
-                        <button class="btn btn-danger dropdown-toggle" id="gen" style="width: 100%" type="button" data-toggle="dropdown">Genre</button>
+                        <button class="btn btn-danger dropdown-toggle hvr-grow" id="gen" style="width: 100%" type="button" data-toggle="dropdown">Genre</button>
                         <ul class="dropdown-menu">
                             <li class="genPick"><a>Action</a></li>
                             <li class="genPick"><a>Comedy</a></li>
@@ -38,7 +47,7 @@
                         </ul>
                     </div>
                     <div class="dropdown">
-                        <button class="btn btn-danger dropdown-toggle" id="rate" style="width: 100%" type="button" data-toggle="dropdown">Rating</button>
+                        <button class="btn btn-danger dropdown-toggle hvr-grow" id="rate" style="width: 100%" type="button" data-toggle="dropdown">Rating</button>
                         <ul class="dropdown-menu">
                             <li class="ratePick"><a>G</a></li>
                             <li class="ratePick"><a>PG</a></li>
@@ -47,27 +56,27 @@
                         </ul>
                     </div>
                     <div class="dropdown">
-                        <button class="btn btn-danger dropdown-toggle" id="score" style="width: 100%" type="button" data-toggle="dropdown">Score</button>
+                        <button class="btn btn-danger dropdown-toggle hvr-grow" id="score" style="width: 100%" type="button" data-toggle="dropdown">Score</button>
                         <ul class="dropdown-menu">
                             <li class="scorePick"><a>50%+</a></li>
                             <li class="scorePick"><a>75%+</a></li>
                             <li class="scorePick"><a>90%+</a></li>
                         </ul>
                     </div>
-                    <div class="btn btn-danger search" style="width: 100%" id="search">
+                    <div class="btn btn-danger search hvr-grow" style="width: 100%" id="search" type="button" >
                         <span class="glyphicon glyphicon-search" aria-bed="true"></span>Search
                     </div>
-                    <div class="btn btn-danger clear" style="width: 100%" id="clear">
+                    <div class="btn btn-danger clear hvr-grow" style="width: 100%" id="clear" type="button">
                         <span class="glyphicon glyphicon-trash" aria-bed="true"></span>Clear
                     </div>
                 </div>
             </div>
-            <div id="outputBox" class="col-md-10">
+            <div id="outputBox" class="col-md-9 col-lg-10">
                 <div class="outputBox">
                     <div class="row">
-                        <div class="col-md-6 col-lg-4">
+                        <div class="col-md-6 col-lg-4 hvr-grow">
                             <div class="card" id="card1">
-                                <img class="card-img-top mx-auto" src=" ">
+                                <img class="card-img-top mx-auto" src="assets/images/film.png">
                                 <div class="card-body"><span class="customText">Pic</span>
                                     <p class="card-text" id="plot"></p>
                                     <p class="card-text" id="rating"></p>
@@ -76,9 +85,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4">
+                        <div class="col-md-6 col-lg-4 hvr-grow">
                             <div class="card" id="card2">
-                                <img class="card-img-top mx-auto" src=" ">
+                                <img class="card-img-top mx-auto" src="assets/images/film.png">
                                 <div class="card-body "><span class="customText">A</span>
                                     <p class="card-text" id="plot"></p>
                                     <p class="card-text" id="rating"></p>
@@ -87,9 +96,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4">
+                        <div class="col-md-6 col-lg-4 hvr-grow">
                             <div class="card" id="card3">
-                                <img class="card-img-top mx-auto" src=" ">
+                                <img class="card-img-top mx-auto" src="assets/images/film.png">
                                 <div class="card-body "><span class="customText">Flik</span>
                                     <p class="card-text" id="plot"></p>
                                     <p class="card-text" id="rating"></p>

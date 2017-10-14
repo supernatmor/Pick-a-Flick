@@ -89,6 +89,8 @@ function run(counter, title) {
     console.log(score);
     console.log(runTime);
 
+    $(".customText").remove();
+
     $("#card" + (counter + 1) + " .card-img-top").attr("src", imgURL);
     $("#card" + (counter + 1) + " #plot").text(plot);
     $("#card" + (counter + 1) + " #score").text(score);

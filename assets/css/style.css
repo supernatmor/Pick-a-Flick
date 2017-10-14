@@ -9,6 +9,15 @@ body {
 	background-size: 100% 100%;
 }
 
+.customText {
+	font-size: 72px;
+	color: white;
+	text-align: center;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+
 .userInput {
 	color: white;
 	padding: 10px;
@@ -23,19 +32,19 @@ body {
 	color: white;
 	text-align: center;
 	font-size: 100px;
-	text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+	text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75);
 
 	
 }
 
 .card {
-	max-height: 500px;
+	height: 480px;
 	background: #7F2626;
 	border-style: solid;
 	border-width: 10px;
 	border-color: #CC0000;
 	margin: 10px;
-	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75);
 }
 
 .card-img-top {
@@ -56,14 +65,15 @@ body {
 	color: white;
 	padding-left: 12px;
 	padding-right: 12px;
-	margin-top: 10px line-height: 18px;
+	margin-top: 12px;
+	line-height: 18px;
 }
 
 .btn-danger {
 	background: #CC0000;
 	color: white;
 	text-align: center;
-	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75);
 }
 
 .btn {

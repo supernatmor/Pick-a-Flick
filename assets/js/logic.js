@@ -33,7 +33,16 @@ $(".genPick a").on("click", function () {
   console.log(genreChoice);
 });
 $(".ratePick a").on("click", function () {
-  ratingChoice = $(this).text().trim();
+  var rating = $(this).text().trim();
+  if (rating === "PG") {
+    ratingChoice = 1;
+  } else if (rating === "PG-13") {
+    ratingChoice = 2;
+  } else if (rating === "R") {
+    ratingChoice = 3;
+  } else {
+    ratingChoice = 0;
+  }
   console.log(ratingChoice);
 });
 $(".scorePick a").on("click", function () {
@@ -117,11 +126,22 @@ function run(counter, title) {
 
     var scoreCompare = score.slice(0, 2);
 
+    if (rating === "PG") {
+      ratingCompare = 1;
+    } else if (rating === "PG-13") {
+      ratingCompare = 2;
+    } else if (rating === "R") {
+      ratingCompare = 3;
+    } else {
+      ratingCompare = 0;
+    }
+
     console.log(scoreCompare);
+    console.log(ratingCompare);
 
     // Determine if rating & score are correct 
 
-    if (rating === ratingChoice && scoreCompare > scoreChoice) {
+    if (ratingCompare <= ratingChoice && scoreCompare >= scoreChoice) {
 
       $("#card" + (counter + 1) + " .card-img-top").attr("src", imgURL).attr("title", title);
       $("#card" + (counter + 1) + " #plot").text(plot);

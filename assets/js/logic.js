@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  var removeData = database.ref().child("data");
+  removeData.remove();
   console.log("ready");
 });
 
@@ -43,7 +45,23 @@ $(".scorePick a").on("click", function () {
 // Search event
 
 $(".search").on("click", function () {
+  var removeData = database.ref().child("data");
+  removeData.remove();
   firebaseStorage();
+});
+
+// Remove results
+
+$(".clear").on("click", function () {
+  var removeData = database.ref().child("data");
+  removeData.remove();
+  for (var i = 0; i < 3; i++) {
+    $("#card" + (i + 1) + " .card-img-top").attr("src", "assets/images/film.png");
+    $("#card" + (i + 1) + " #plot").text("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel veritatis dicta, minus dignissimos illo quasi porro sint adipisci, fugit nisi saepe vero!");
+    $("#card" + (i + 1) + " #score").text("Score: 92%");
+    $("#card" + (i + 1) + " #length").text("Length: 96 min");
+    $("#card" + (i + 1) + " #rating").text("Rating: PG");
+  }
 });
 
 // Store in firebase
@@ -96,7 +114,6 @@ function run(counter, title) {
     $("#card" + (counter + 1) + " #rating").text(rating);
 
     // Determine if correct parameters 
-
   });
 
 }

@@ -1,8 +1,9 @@
+
 $(document).ready(function () {
   var removeData = database.ref().child("data");
   removeData.remove();
   console.log("ready");
-});
+
 
 // Initalize a random global number
 var globalRandom = 0;
@@ -10,12 +11,12 @@ var globalRandom = 0;
 // Initialize Firebase
 
 var config = {
-  apiKey: "AIzaSyC1_ZohEq6qS79WnJgg3WwW_QXOW_Ez_TA",
-  authDomain: "deh2-6f6cf.firebaseapp.com",
-  databaseURL: "https://deh2-6f6cf.firebaseio.com",
-  projectId: "deh2-6f6cf",
-  storageBucket: "deh2-6f6cf.appspot.com",
-  messagingSenderId: "482010970500"
+    apiKey: "AIzaSyC1_ZohEq6qS79WnJgg3WwW_QXOW_Ez_TA",
+    authDomain: "deh2-6f6cf.firebaseapp.com",
+    databaseURL: "https://deh2-6f6cf.firebaseio.com",
+    projectId: "deh2-6f6cf",
+    storageBucket: "deh2-6f6cf.appspot.com",
+    messagingSenderId: "482010970500"
 };
 
 firebase.initializeApp(config);
@@ -27,14 +28,18 @@ var dataDB = database.ref("data");
 var pickDB = database.ref("userPick");
 
 // Grab user input  
-$(".venPick a").on("click", function () {
-  venueChoice = $(this).text().trim();
-  console.log(venueChoice);
+$(".venPick a").on("click", function() {
+    venueChoice = $(this).text().trim();
+    console.log(venueChoice);
+    $("#venue").html($(this).text().trim()).css("background", "#7f2626").css("border-color", "#7f2626").off(click);
+    $(".venPick").off(click);
 });
-$(".genPick a").on("click", function () {
-  genreChoice = $(this).text().trim();
-  console.log(genreChoice);
+$(".genPick a").on("click", function() {
+    genreChoice = $(this).text().trim();
+    console.log(genreChoice);
+    $("#gen").html($(this).text().trim()).css("background", "#7f2626").css("border-color", "#7f2626").off("click");
 });
+  
 $(".ratePick a").on("click", function () {
   var rating = $(this).text().trim();
   // Convert to a number for comparison
@@ -47,6 +52,7 @@ $(".ratePick a").on("click", function () {
   } else {
     ratingChoice = 0;
   }
+  $("#rate").html($(this).text().trim()).css("background", "#7f2626").css("border-color", "#7f2626").off("click");
   console.log(ratingChoice);
 });
 $(".scorePick a").on("click", function () {
@@ -61,15 +67,34 @@ $(".scorePick a").on("click", function () {
   } else {
     scoreChoice = 0;
   }
+  $("#score").html($(this).text().trim()).css("background", "#7f2626").css("border-color", "#7f2626").off("click");
   console.log(scoreChoice);
-});
+
+
+// Clear Button
+$("#clear").on("click", function() {
+    $("#venue").html("Stay In/Go Out?").css("background", "#CC0000").css("border-color", "#CC0000");
+    $("#gen").html("Genre").css("background", "#CC0000").css("border-color", "#CC0000");
+    $("#rate").html("Rating").css("background", "#CC0000").css("border-color", "#CC0000");
+    $("#score").html("Score").css("background", "#CC0000").css("border-color", "#CC0000");
+    $("#search").on("click", function() {
+      firebaseStorage();
+    });
+    $(".search").on("click", function() {
+      firebaseStorage();
+    });
+})
+
 
 // Search event
+
 
 $(".search").on("click", function () {
   var removeData = database.ref().child("data");
   removeData.remove();
   firebaseStorage();
+  $("#search").off("click");
+    $(".search").off("click");
 });
 
 // Clear button event
@@ -96,45 +121,53 @@ function clear() {
 // Store in firebase
 
 function firebaseStorage() {
-  dataDB.push({
-    venue: venueChoice,
-    genre: genreChoice,
-    rating: ratingChoice,
-    score: scoreChoice
-  });
+    dataDB.push({
+        venue: venueChoice,
+        genre: genreChoice,
+        rating: ratingChoice,
+        score: scoreChoice
+    });
 }
 
 // OMDB API
 
 function run(counter, title) {
 
-  var queryURL = "https://www.omdbapi.com/?t=" + title + "&plot=short&apikey=40e9cece";
+    var queryURL = "https://www.omdbapi.com/?t=" + title + "&plot=short&apikey=40e9cece";
 
-  $.ajax({
-    url: queryURL,
-    method: "GET"
-  }).done(function (response) {
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).done(function(response) {
 
-    console.log(response);
+        console.log(response);
+
+        // Set variables
 
     // Grab API values and set variables
 
-    var title = response.Title;
-    var plot = response.Plot;
-    var rating = response.Rated;
-    var genre = response.Genre;
-    var released = response.Released;
-    var imgURL = response.Poster;
-    var score = response.Ratings[1].Value;
-    var runTime = response.Runtime;
+        var title = response.Title;
+        var plot = response.Plot;
+        var rating = response.Rated;
+        var genre = response.Genre;
+        var released = response.Released;
+        var imgURL = response.Poster;
+        var score = response.Ratings[1].Value;
+        var runTime = response.Runtime;
+      
+      console.log(title);
+        console.log(plot);
+        console.log(rating);
+        console.log(released);
+        console.log(imgURL);
+        console.log(score);
+        console.log(runTime);
 
-    console.log(title);
-    console.log(plot);
-    console.log(rating);
-    console.log(released);
-    console.log(imgURL);
-    console.log(score);
-    console.log(runTime);
+        $(".customText").remove();
+
+
+        
+
 
     // Format and create numbers to compare
 
@@ -167,11 +200,13 @@ function run(counter, title) {
       clear();
     }
 
-  });
+
+    });
 
 }
 
 // Grab random movie title to pass to OMDB API
+
 
 dataDB.on("child_added", function (snapshot) {
 
@@ -221,8 +256,26 @@ dataDB.on("child_added", function (snapshot) {
         i--;
         var random = Math.floor(Math.random() * 19);
       }
-    }
-  });
+
+
+    $.ajax(settings).done(function(response2) {
+        console.log(response2);
+
+        for (var i = 0; i < 3; i++) {
+            var random = Math.floor(Math.random() * 19);
+            console.log(random);
+            if (globalRandom != random) {
+                var title = response2.results[random].original_title;
+                console.log(title);
+                var counter = i;
+                globalRandom = random;
+                run(counter, title);
+            } else {
+                i--;
+                var random = Math.floor(Math.random() * 19);
+            }
+        }
+    });
 
 });
 

@@ -107,7 +107,7 @@ function run(counter, title) {
     console.log(score);
     console.log(runTime);
 
-    $("#card" + (counter + 1) + " .card-img-top").attr("src", imgURL);
+    $("#card" + (counter + 1) + " .card-img-top").attr("src", imgURL).attr("title", title);
     $("#card" + (counter + 1) + " #plot").text(plot);
     $("#card" + (counter + 1) + " #score").text(score);
     $("#card" + (counter + 1) + " #length").text(runTime);
@@ -167,6 +167,12 @@ dataDB.on("child_added", function (snapshot) {
     }
   });
 
+});
+
+$(".card-img-top").on("click", function () {
+  console.log(this.title);
+  var title = this.title;
+  window.open("https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=" + title, '_blank');
 });
 
 // // Click event for movie selection

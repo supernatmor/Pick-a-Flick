@@ -4,7 +4,6 @@ $(document).ready(function () {
   console.log("ready");
 });
 
-// var title = "";
 var globalRandom = 0;
 
 // Initialize Firebase
@@ -172,7 +171,11 @@ dataDB.on("child_added", function (snapshot) {
 $(".card-img-top").on("click", function () {
   console.log(this.title);
   var title = this.title;
-  window.open("https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=" + title, '_blank');
+  if (venueChoice === "In") {
+    window.open("https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=" + title, '_blank');
+  } else {
+    window.open("https://www.fandango.com/search?q=" + title);
+  }
 });
 
 // // Click event for movie selection

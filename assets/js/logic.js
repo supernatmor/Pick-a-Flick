@@ -37,7 +37,16 @@ $(".ratePick a").on("click", function () {
   console.log(ratingChoice);
 });
 $(".scorePick a").on("click", function () {
-  scoreChoice = $(this).text().trim();
+  var score = $(this).text().trim();
+  if (score === "50%+") {
+    scoreChoice = 50;
+  } else if (score === "75%+") {
+    scoreChoice = 75;
+  } else if (score === "90%+") {
+    scoreChoice = 90;
+  } else {
+    scoreChoice = 0;
+  }
   console.log(scoreChoice);
 });
 
@@ -106,13 +115,23 @@ function run(counter, title) {
     console.log(score);
     console.log(runTime);
 
-    $("#card" + (counter + 1) + " .card-img-top").attr("src", imgURL).attr("title", title);
-    $("#card" + (counter + 1) + " #plot").text(plot);
-    $("#card" + (counter + 1) + " #score").text(score);
-    $("#card" + (counter + 1) + " #length").text(runTime);
-    $("#card" + (counter + 1) + " #rating").text(rating);
+    var scoreCompare = score.slice(0, 2);
 
-    // Determine if correct parameters 
+    console.log(scoreCompare);
+
+    // Determine if rating & score are correct 
+
+    if (rating === ratingChoice && scoreCompare > scoreChoice) {
+
+      $("#card" + (counter + 1) + " .card-img-top").attr("src", imgURL).attr("title", title);
+      $("#card" + (counter + 1) + " #plot").text(plot);
+      $("#card" + (counter + 1) + " #score").text(score);
+      $("#card" + (counter + 1) + " #length").text(runTime);
+      $("#card" + (counter + 1) + " #rating").text(rating);
+    } else {}
+
+    // Determine if correct parameters
+
   });
 
 }
@@ -174,7 +193,7 @@ $(".card-img-top").on("click", function () {
   if (venueChoice === "In") {
     window.open("https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=" + title, '_blank');
   } else {
-    window.open("https://www.fandango.com/search?q=" + title);
+    window.open("https://www.fandango.com/search?q=" + title, "_blank");
   }
 });
 

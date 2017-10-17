@@ -4,6 +4,7 @@ $(document).ready(function () {
   console.log("ready");
 });
 
+// Initalize a random global number
 var globalRandom = 0;
 
 // Initialize Firebase
@@ -19,9 +20,11 @@ var config = {
 
 firebase.initializeApp(config);
 
-var database = firebase.database();
+// Firebase variables
 
+var database = firebase.database();
 var dataDB = database.ref("data");
+var pickDB = database.ref("userPick");
 
 // Grab user input  
 $(".venPick a").on("click", function () {
@@ -34,6 +37,7 @@ $(".genPick a").on("click", function () {
 });
 $(".ratePick a").on("click", function () {
   var rating = $(this).text().trim();
+  // Convert to a number for comparison
   if (rating === "PG") {
     ratingChoice = 1;
   } else if (rating === "PG-13") {
@@ -47,6 +51,7 @@ $(".ratePick a").on("click", function () {
 });
 $(".scorePick a").on("click", function () {
   var score = $(this).text().trim();
+  // Convert to a number for comparison
   if (score === "50%+") {
     scoreChoice = 50;
   } else if (score === "75%+") {
@@ -67,9 +72,16 @@ $(".search").on("click", function () {
   firebaseStorage();
 });
 
-// Remove results
+// Clear button event
 
 $(".clear").on("click", function () {
+  clear();
+});
+
+// Clear function to clear database and displayed results
+
+function clear() {
+  console.log("CLEARED");
   var removeData = database.ref().child("data");
   removeData.remove();
   for (var i = 0; i < 3; i++) {
@@ -79,7 +91,7 @@ $(".clear").on("click", function () {
     $("#card" + (i + 1) + " #length").text("Length: 96 min");
     $("#card" + (i + 1) + " #rating").text("Rating: PG");
   }
-});
+}
 
 // Store in firebase
 
@@ -92,7 +104,7 @@ function firebaseStorage() {
   });
 }
 
-// Ajax call to grab movies from OMBD API
+// OMDB API
 
 function run(counter, title) {
 
@@ -105,7 +117,7 @@ function run(counter, title) {
 
     console.log(response);
 
-    // Set variables
+    // Grab API values and set variables
 
     var title = response.Title;
     var plot = response.Plot;
@@ -123,6 +135,8 @@ function run(counter, title) {
     console.log(imgURL);
     console.log(score);
     console.log(runTime);
+
+    // Format and create numbers to compare
 
     var scoreCompare = score.slice(0, 2);
 
@@ -148,15 +162,16 @@ function run(counter, title) {
       $("#card" + (counter + 1) + " #score").text(score);
       $("#card" + (counter + 1) + " #length").text(runTime);
       $("#card" + (counter + 1) + " #rating").text(rating);
-    } else {}
-
-    // Determine if correct parameters
+    } else {
+      // Clear fields and database if one fails
+      clear();
+    }
 
   });
 
 }
 
-// Grab a random movie title 
+// Grab random movie title to pass to OMDB API
 
 dataDB.on("child_added", function (snapshot) {
 
@@ -176,7 +191,6 @@ dataDB.on("child_added", function (snapshot) {
     var genreID = 878;
   }
 
-
   var settings = {
     "async": true,
     "crossDomain": true,
@@ -186,12 +200,17 @@ dataDB.on("child_added", function (snapshot) {
     "data": "{}"
   }
 
+  //The Movie Database API 
+
   $.ajax(settings).done(function (response2) {
     console.log(response2);
+
+    // Grab random movie out of API list and pass it into OMDB API
 
     for (var i = 0; i < 3; i++) {
       var random = Math.floor(Math.random() * 19);
       console.log(random);
+      // Make sure same movie isn't displayed 
       if (globalRandom != random) {
         var title = response2.results[random].original_title;
         console.log(title);
@@ -207,14 +226,19 @@ dataDB.on("child_added", function (snapshot) {
 
 });
 
+// Click event for poster to redirect to either Amazon or Fandango
+
 $(".card-img-top").on("click", function () {
   console.log(this.title);
   var title = this.title;
   if (venueChoice === "In") {
-    window.open("https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=" + title, '_blank');
+    window.open("https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=" + title + " blu ray", '_blank');
   } else {
     window.open("https://www.fandango.com/search?q=" + title, "_blank");
   }
+  pickDB.push({
+    choice: title
+  });
 });
 
 // // Click event for movie selection

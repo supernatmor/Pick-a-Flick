@@ -246,3 +246,9 @@ function run(title) {
   });
 
 }
+
+// ----- Things to Add ----
+// Grab only movies in theaters 
+
+// ----- Known Bugs -----
+// If no results match page just stays blank

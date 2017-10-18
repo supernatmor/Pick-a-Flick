@@ -47,6 +47,14 @@ img {
     text-shadow: none;
 }
 
+
+::selection {
+    background: #4aaf51;
+    color: #fff;
+    text-shadow: none;
+}
+
+
 ::selection {
     background: #4aaf51;
     color: #fff;
@@ -120,6 +128,7 @@ img {
     background: rgba(0, 0, 0, 0.3);
     color: #fff;
 }
+
 
 
 /***** Top content *****/
@@ -242,6 +251,13 @@ img {
     text-align: center;
 }
 
+.register a {
+    color: white;
+    display: block;
+    text-align: center;
+}
+
+
 
 /***** Media queries *****/
 
@@ -250,12 +266,14 @@ img {
 @media (min-width: 768px) and (max-width: 991px) {}
 
 @media (max-width: 767px) {
+
     .inner-bg {
         padding: 60px 0 110px 0;
     }
 }
 
 @media (max-width: 415px) {
+
     h1,
     h2 {
         font-size: 32px;

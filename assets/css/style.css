@@ -1,84 +1,141 @@
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-	background-image: url(../images/altbg.jpg);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: 100% 100%;
+    background-image: url(../images/altbg.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.animation .card {
+    -webkit-animation-name: spin; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 10s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-iteration-count: infinite; /* Safari 4.0 - 8.0 */
+    animation-name: spin;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes spin {
+    12%  {transform: rotateY(180deg);}
+    25%  {transform: rotateY(0deg);}
+    60%  {transform: rotateY(0deg);}
+    72%  {transform: rotateY(180deg);}
+    85% {transform: rotateY(0deg);}
+    100% {transform: rotateY(0deg);}
+}
+
+/* Standard syntax */
+@keyframes spin {
+    12%  {transform: rotateY(180deg);}
+    25%  {transform: rotateY(0deg);}
+    60%  {transform: rotateY(0deg);}
+    72%  {transform: rotateY(180deg);}
+    85% {transform: rotateY(0deg);}
+    100% {transform: rotateY(0deg);}
+}
+
+
+.customText {
+    font-size: 96px;
+    color: white;
+    text-align: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .userInput {
-	color: white;
-	padding: 10px;
-	margin-top: 20px;
+    color: white;
+    padding-top: 5px;
+    margin-top: 15px;
 }
 
 .outputBox {
-	margin-top: 20px;
+    margin-top: 15px;
 }
 
 .title {
-	color: white;
-	text-align: center;
-	font-size: 100px;
-	text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
-
-	
+    color: white;
+    text-align: center;
+    font-size: 100px;
+    text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75);
 }
 
 .card {
-	max-height: 500px;
-	background: #7F2626;
-	border-style: solid;
-	border-width: 10px;
-	border-color: #CC0000;
-	margin: 10px;
-	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+    height: 500px;
+    background: #7F2626;
+    border-style: ridge;
+    border-width: 10px;
+    border-color: #CC0000;
+    margin: 10px;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75);
+}
+
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+.hvr-grow:hover,
+.hvr-grow:focus,
+.hvr-grow:active {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    
 }
 
 .card-img-top {
-	height: 150px;
-	width: 150px;
-	text-align: center;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 10px;
-	border-style: solid;
-	border-width: 5px;
-	border-color: #CC0000;
-	border-spacing: 5px;
+    height: 150px;
+    width: 150px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border-style: outset;
+    border-width: 5px;
+    border-color: #CC0000;
+    border-spacing: 5px;
 }
 
 .card-text {
-	color: white;
-	padding-left: 12px;
-	padding-right: 12px;
-	margin-top: 10px line-height: 18px;
+    color: white;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-top: 12px;
+    line-height: 18px;
 }
 
 .btn-danger {
-	background: #CC0000;
-	color: white;
-	text-align: center;
-	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+    background: #CC0000;
+    color: white;
+    text-align: center;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75);
 }
 
 .btn {
-	margin-top: 5px;
-	margin-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .dropdown-item {
-	background: #7F2626;
-	color: white;
-	text-align: center
+    background: #7F2626;
+    color: white;
+    text-align: center
 }
 
 @media (min-width: 992px) {
-	.userInput {
-		width: 200px;
-	}
+    .userInput {
+        width: 150px;
+    }
 }

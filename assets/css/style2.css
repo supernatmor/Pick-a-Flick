@@ -47,12 +47,19 @@ img {
     text-shadow: none;
 }
 
+
 ::selection {
     background: #4aaf51;
     color: #fff;
     text-shadow: none;
 }
 
+
+::selection {
+    background: #4aaf51;
+    color: #fff;
+    text-shadow: none;
+}
 
 .btn-link-1 {
     display: inline-block;
@@ -236,6 +243,12 @@ img {
 
 .social-login-buttons {
     margin-top: 25px;
+}
+
+.register a {
+    color: white;
+    display: block;
+    text-align: center;
 }
 
 .register a {

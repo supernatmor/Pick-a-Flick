@@ -4,8 +4,11 @@ $(document).ready(function () {
   console.log("ready");
 });
 
-// Initalize a random global number
+// Initalize a random global number & page number 
 var globalRandom = 0;
+var pageNum = 1;
+var titleArray = [];
+var counter = 1;
 
 // Initialize Firebase
 
@@ -29,11 +32,22 @@ var pickDB = database.ref("userPick");
 // Grab user input  
 $(".venPick a").on("click", function () {
   venueChoice = $(this).text().trim();
-  console.log(venueChoice);
+  console.log("Venue: " + venueChoice);
 });
 $(".genPick a").on("click", function () {
   genreChoice = $(this).text().trim();
-  console.log(genreChoice);
+  if (genreChoice === "Action") {
+    genreID = 28;
+  } else if (genreChoice === "Comedy") {
+    genreID = 35;
+  } else if (genreChoice === "Horror") {
+    genreID = 27;
+  } else if (genreChoice === "Romance") {
+    genreID = 10749;
+  } else if (genreChoice === "Sci-Fi") {
+    genreID = 878;
+  }
+  console.log("Genre: " + genreChoice);
 });
 $(".ratePick a").on("click", function () {
   var rating = $(this).text().trim();
@@ -47,7 +61,7 @@ $(".ratePick a").on("click", function () {
   } else {
     ratingChoice = 0;
   }
-  console.log(ratingChoice);
+  console.log("Rating: " + ratingChoice);
 });
 $(".scorePick a").on("click", function () {
   var score = $(this).text().trim();
@@ -61,7 +75,7 @@ $(".scorePick a").on("click", function () {
   } else {
     scoreChoice = 0;
   }
-  console.log(scoreChoice);
+  console.log("Score: " + scoreChoice);
 });
 
 // Search event
@@ -69,6 +83,8 @@ $(".scorePick a").on("click", function () {
 $(".search").on("click", function () {
   var removeData = database.ref().child("data");
   removeData.remove();
+  counter = 0;
+  clear();
   firebaseStorage();
 });
 
@@ -102,11 +118,72 @@ function firebaseStorage() {
     rating: ratingChoice,
     score: scoreChoice
   });
+  run2();
 }
 
+function run2() {
+
+  for (var i = 0; i < 20; i++) {
+    pageNum++;
+    setTimeout(movieTitle, 1000);
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://api.themoviedb.org/3/genre/" + genreID + "/movies?sort_by=created_at.asc&page=" + pageNum + "&include_adult=false&language=en-US&api_key=c46142c3f1b1cbfb5aa59c22ce677737",
+      "method": "GET",
+      "headers": {},
+      "data": "{}"
+    }
+
+    $.ajax(settings).done(function (response2) {
+      console.log(response2);
+
+
+      // Grab random movie out of API list and pass it into OMDB API
+
+      for (var i = 0; i < 10; i++) {
+        var random = Math.floor(Math.random() * 19);
+        console.log(random);
+        // Make sure same movie isn't displayed 
+        if (globalRandom != random) {
+          var title = response2.results[random].original_title;
+          console.log(title);
+          globalRandom = random;
+          titleArray.push(title);
+        } else {
+          var random = Math.floor(Math.random() * 19);
+        }
+      }
+      console.log(titleArray);
+    });
+  }
+}
+
+$(".card-img-top").on("click", function () {
+  console.log(this.title);
+  var title = this.title;
+  if (venueChoice === "In") {
+    window.open("https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=" + title + " blu ray", '_blank');
+  } else {
+    window.open("https://www.fandango.com/search?q=" + title, "_blank");
+  }
+  // Store choice in firebase
+  pickDB.push({
+    choice: title
+  });
+});
+
+function movieTitle() {
+  console.log("COUNTER: " + counter);
+  if (counter < 4) {
+    var random = Math.floor(Math.random() * titleArray.length);
+    var title = titleArray[random];
+    run(title);
+  }
+}
 // OMDB API
 
-function run(counter, title) {
+function run(title) {
 
   var queryURL = "https://www.omdbapi.com/?t=" + title + "&plot=short&apikey=40e9cece";
 
@@ -150,109 +227,22 @@ function run(counter, title) {
       ratingCompare = 0;
     }
 
-    console.log(scoreCompare);
-    console.log(ratingCompare);
+    console.log("ScoreCompare: " + scoreCompare);
+    console.log("RatingCompare: " + ratingCompare);
 
     // Determine if rating & score are correct 
 
     if (ratingCompare <= ratingChoice && scoreCompare >= scoreChoice) {
-
-      $("#card" + (counter + 1) + " .card-img-top").attr("src", imgURL).attr("title", title);
-      $("#card" + (counter + 1) + " #plot").text(plot);
-      $("#card" + (counter + 1) + " #score").text(score);
-      $("#card" + (counter + 1) + " #length").text(runTime);
-      $("#card" + (counter + 1) + " #rating").text(rating);
+      $("#card" + (counter) + " .card-img-top").attr("src", imgURL).attr("title", title);
+      $("#card" + (counter) + " #plot").text(plot);
+      $("#card" + (counter) + " #score").text(score);
+      $("#card" + (counter) + " #length").text(runTime);
+      $("#card" + (counter) + " #rating").text(rating);
+      counter++;
     } else {
-      // Clear fields and database if one fails
-      clear();
+      movieTitle();
     }
 
   });
 
 }
-
-// Grab random movie title to pass to OMDB API
-
-dataDB.on("child_added", function (snapshot) {
-
-  // Grab chosen genre and assign search id
-
-  var chosenGenre = snapshot.val().genre;
-
-  if (chosenGenre === "Action") {
-    var genreID = 28;
-  } else if (chosenGenre === "Comedy") {
-    var genreID = 35;
-  } else if (chosenGenre === "Horror") {
-    var genreID = 27;
-  } else if (chosenGenre === "Romance") {
-    var genreID = 10749;
-  } else if (chosenGenre === "Sci-Fi") {
-    var genreID = 878;
-  }
-
-  var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://api.themoviedb.org/3/genre/" + genreID + "/movies?sort_by=created_at.asc&include_adult=false&language=en-US&api_key=c46142c3f1b1cbfb5aa59c22ce677737",
-    "method": "GET",
-    "headers": {},
-    "data": "{}"
-  }
-
-  //The Movie Database API 
-
-  $.ajax(settings).done(function (response2) {
-    console.log(response2);
-
-    // Grab random movie out of API list and pass it into OMDB API
-
-    for (var i = 0; i < 3; i++) {
-      var random = Math.floor(Math.random() * 19);
-      console.log(random);
-      // Make sure same movie isn't displayed 
-      if (globalRandom != random) {
-        var title = response2.results[random].original_title;
-        console.log(title);
-        var counter = i;
-        globalRandom = random;
-        run(counter, title);
-      } else {
-        i--;
-        var random = Math.floor(Math.random() * 19);
-      }
-    }
-  });
-
-});
-
-// Click event for poster to redirect to either Amazon or Fandango
-
-$(".card-img-top").on("click", function () {
-  console.log(this.title);
-  var title = this.title;
-  if (venueChoice === "In") {
-    window.open("https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=" + title + " blu ray", '_blank');
-  } else {
-    window.open("https://www.fandango.com/search?q=" + title, "_blank");
-  }
-  pickDB.push({
-    choice: title
-  });
-});
-
-// // Click event for movie selection
-
-// $(DIV that holds diplay results).on("click", ".poster", function () {
-
-//   var movie = $(this).val();
-
-//   // Push choice to firebase
-
-//   database.ref().push({
-//     choice: movie
-//   });
-
-//   // Send to fandango/amazon
-
-// });

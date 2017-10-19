@@ -257,6 +257,11 @@ img {
     text-align: center;
 }
 
+.btn-block {
+    display: inline;
+    width: 25%;
+    margin-right: 5px;
+}
 
 
 /***** Media queries *****/

@@ -9,6 +9,8 @@ var globalRandom = 0;
 var pageNum = 1;
 var titleArray = [];
 var counter = 1;
+var title1 = "";
+var title2 = "";
 
 // Initialize Firebase
 
@@ -33,6 +35,7 @@ var pickDB = database.ref("userPick");
 $(".venPick a").on("click", function () {
   venueChoice = $(this).text().trim();
   console.log("Venue: " + venueChoice);
+  $("#venue").prop("disabled", true);
 });
 $(".genPick a").on("click", function () {
   genreChoice = $(this).text().trim();
@@ -48,6 +51,7 @@ $(".genPick a").on("click", function () {
     genreID = 878;
   }
   console.log("Genre: " + genreChoice);
+  $("#gen").prop("disabled", true);
 });
 $(".ratePick a").on("click", function () {
   var rating = $(this).text().trim();
@@ -62,6 +66,7 @@ $(".ratePick a").on("click", function () {
     ratingChoice = 0;
   }
   console.log("Rating: " + ratingChoice);
+  $("#rate").prop("disabled", true);
 });
 $(".scorePick a").on("click", function () {
   var score = $(this).text().trim();
@@ -76,6 +81,7 @@ $(".scorePick a").on("click", function () {
     scoreChoice = 0;
   }
   console.log("Score: " + scoreChoice);
+  $("#score").prop("disabled", true);
 });
 
 // Search event
@@ -83,8 +89,10 @@ $(".scorePick a").on("click", function () {
 $(".search").on("click", function () {
   var removeData = database.ref().child("data");
   removeData.remove();
-  counter = 0;
-  clear();
+  counter = 1;
+  titleArray.length = 0;
+  $(this).prop("disabled", true);
+  // clear();
   firebaseStorage();
 });
 
@@ -100,13 +108,19 @@ function clear() {
   console.log("CLEARED");
   var removeData = database.ref().child("data");
   removeData.remove();
-  for (var i = 0; i < 3; i++) {
-    $("#card" + (i + 1) + " .card-img-top").attr("src", "assets/images/film.png");
-    $("#card" + (i + 1) + " #plot").text("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel veritatis dicta, minus dignissimos illo quasi porro sint adipisci, fugit nisi saepe vero!");
-    $("#card" + (i + 1) + " #score").text("Score: 92%");
-    $("#card" + (i + 1) + " #length").text("Length: 96 min");
-    $("#card" + (i + 1) + " #rating").text("Rating: PG");
-  }
+  $("#venue").prop("disabled", false);
+  $("#gen").prop("disabled", false);
+  $("#rate").prop("disabled", false);
+  $("#score").prop("disabled", false);
+  // for (var i = 0; i < 3; i++) {
+  //   $("#card" + (i + 1) + " .card-img-top").attr("src", "assets/images/film.png");
+  //   $("#card" + (i + 1) + " #plot").text("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel veritatis dicta, minus dignissimos illo quasi porro sint adipisci, fugit nisi saepe vero!");
+  //   $("#card" + (i + 1) + " #score").text("Score: 92%");
+  //   $("#card" + (i + 1) + " #length").text("Length: 96 min");
+  //   $("#card" + (i + 1) + " #rating").text("Rating: PG");
+  // }
+  // location.reload();
+  $("#search").prop("disabled", false);
 }
 
 // Store in firebase
@@ -122,8 +136,14 @@ function firebaseStorage() {
 }
 
 function run2() {
+  // if (venueChoice === "Out") {
+  //   pageNum = 0;
+  //   var number = 19;
+  // } else {
+  //   var number = 0;
+  // }
 
-  for (var i = 0; i < 20; i++) {
+  for (var i = 0; i < 50; i++) {
     pageNum++;
     setTimeout(movieTitle, 1000);
     var settings = {
@@ -232,12 +252,19 @@ function run(title) {
 
     // Determine if rating & score are correct 
 
-    if (ratingCompare <= ratingChoice && scoreCompare >= scoreChoice) {
+    if (ratingCompare <= ratingChoice && scoreCompare >= scoreChoice && title != title1 && title != title2) {
       $("#card" + (counter) + " .card-img-top").attr("src", imgURL).attr("title", title);
       $("#card" + (counter) + " #plot").text(plot);
       $("#card" + (counter) + " #score").text(score);
       $("#card" + (counter) + " #length").text(runTime);
       $("#card" + (counter) + " #rating").text(rating);
+      if (counter === 1) {
+        var title1 = title;
+        console.log("TITLE1: " + title1);
+      } else if (counter === 2) {
+        var title2 = title;
+        console.log("TITLE2: " + title2);
+      }
       counter++;
     } else {
       movieTitle();
@@ -248,7 +275,10 @@ function run(title) {
 }
 
 // ----- Things to Add ----
-// Grab only movies in theaters 
+// If all parameters not selected notify the user
+// 
 
 // ----- Known Bugs -----
 // If no results match page just stays blank
+// Duplicate movies will show up
+// If you hit search over and over then it eventually breaks

@@ -11,6 +11,11 @@ var titleArray = [];
 var counter = 1;
 var title1 = "";
 var title2 = "";
+var venueBool = false;
+var genreBool = false;
+var ratingBool = false;
+var scoreBool = false;
+var multiSearch = false;
 
 // Initialize Firebase
 
@@ -36,6 +41,7 @@ $(".venPick a").on("click", function () {
   venueChoice = $(this).text().trim();
   console.log("Venue: " + venueChoice);
   $("#venue").prop("disabled", true);
+  venueBool = true;
 });
 $(".genPick a").on("click", function () {
   genreChoice = $(this).text().trim();
@@ -52,6 +58,7 @@ $(".genPick a").on("click", function () {
   }
   console.log("Genre: " + genreChoice);
   $("#gen").prop("disabled", true);
+  genreBool = true;
 });
 $(".ratePick a").on("click", function () {
   var rating = $(this).text().trim();
@@ -67,6 +74,7 @@ $(".ratePick a").on("click", function () {
   }
   console.log("Rating: " + ratingChoice);
   $("#rate").prop("disabled", true);
+  ratingBool = true;
 });
 $(".scorePick a").on("click", function () {
   var score = $(this).text().trim();
@@ -82,18 +90,29 @@ $(".scorePick a").on("click", function () {
   }
   console.log("Score: " + scoreChoice);
   $("#score").prop("disabled", true);
+  scoreBool = true;
 });
 
 // Search event
 
 $(".search").on("click", function () {
-  var removeData = database.ref().child("data");
-  removeData.remove();
-  counter = 1;
-  titleArray.length = 0;
-  $(this).prop("disabled", true);
-  // clear();
-  firebaseStorage();
+  if (venueBool && genreBool && ratingBool && scoreBool) {
+    if (multiSearch) {
+      counter = 1;
+      movieTitle();
+    } else {
+      var removeData = database.ref().child("data");
+      removeData.remove();
+      counter = 1;
+      titleArray.length = 0;
+      $(this).prop("disabled", true);
+      // clear();
+      firebaseStorage();
+    }
+  } else {
+    // Display error message
+    console.log("Fill each category");
+  }
 });
 
 // Clear button event
@@ -112,13 +131,17 @@ function clear() {
   $("#gen").prop("disabled", false);
   $("#rate").prop("disabled", false);
   $("#score").prop("disabled", false);
-  // for (var i = 0; i < 3; i++) {
-  //   $("#card" + (i + 1) + " .card-img-top").attr("src", "assets/images/film.png");
-  //   $("#card" + (i + 1) + " #plot").text("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel veritatis dicta, minus dignissimos illo quasi porro sint adipisci, fugit nisi saepe vero!");
-  //   $("#card" + (i + 1) + " #score").text("Score: 92%");
-  //   $("#card" + (i + 1) + " #length").text("Length: 96 min");
-  //   $("#card" + (i + 1) + " #rating").text("Rating: PG");
-  // }
+  venueBool = false;
+  genreBool = false;
+  ratingBool = false;
+  scoreBool = false;
+  for (var i = 0; i < 3; i++) {
+    $("#card" + (i + 1) + " .card-img-top").attr("src", "assets/images/film.png");
+    $("#card" + (i + 1) + " #plot").text("");
+    $("#card" + (i + 1) + " #score").text("");
+    $("#card" + (i + 1) + " #length").text("");
+    $("#card" + (i + 1) + " #rating").text("");
+  }
   // location.reload();
   $("#search").prop("disabled", false);
 }
@@ -266,8 +289,10 @@ function run(title) {
         console.log("TITLE2: " + title2);
       }
       counter++;
-    } else {
+    } else if (counter < 4) {
       movieTitle();
+    } else {
+      console.log("DONE");
     }
 
   });
@@ -276,9 +301,12 @@ function run(title) {
 
 // ----- Things to Add ----
 // If all parameters not selected notify the user
-// 
+// Limit amount of searches to 3
+// Make local counters and make global max counter
+// !!!!! Don't forget about disabling search button !!!!!
 
 // ----- Known Bugs -----
 // If no results match page just stays blank
 // Duplicate movies will show up
 // If you hit search over and over then it eventually breaks
+// Counter runs too high

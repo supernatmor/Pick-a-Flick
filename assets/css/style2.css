@@ -41,6 +41,7 @@ img {
     max-width: 100%;
 }
 
+
 ::-moz-selection {
     background: #4aaf51;
     color: #fff;
@@ -59,6 +60,10 @@ img {
     background: #4aaf51;
     color: #fff;
     text-shadow: none;
+}
+
+#default-login {
+    box-shadow: 5px 5px 2.5px rgba(0, 0, 0, 0.75);
 }
 
 .btn-link-1 {
@@ -131,10 +136,11 @@ img {
 
 
 
+
 /***** Top content *****/
 
 .inner-bg {
-    padding: 100px 0 170px 0;
+    padding-top: 10px;
 }
 
 .top-content .text {
@@ -166,15 +172,18 @@ img {
     color: white;
     text-align: center;
     font-size: 100px;
-    text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+    text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75);
+    margin-top: 10px;
 }
 
 .form-box {
     margin-top: 35px;
-    border-style: solid;
+    border-style: ridge;
     border-width: 10px;
     border-color: #CC0000;
     background: #7F2626;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.75);
+
 }
 
 .form-top {
@@ -249,6 +258,7 @@ img {
     color: white;
     display: block;
     text-align: center;
+    padding-top: 5px;
 }
 
 .register a {
@@ -261,12 +271,18 @@ img {
     display: inline;
     width: 25%;
     margin-right: 5px;
+    margin-top: 0 auto;
 }
 
 
 /***** Media queries *****/
 
-@media (min-width: 992px) and (max-width: 1199px) {}
+@media (min-width: 992px) {
+    .btn-social {
+        width: 150px;
+        margin-left: 16px;
+    }
+}
 
 @media (min-width: 768px) and (max-width: 991px) {}
 

@@ -72,7 +72,7 @@
            writeUserData(userName, pw);
        }
 
-       window.open("main.html");
+       window.open("main.html","_self");
    }); //end default login screen processing
 
 

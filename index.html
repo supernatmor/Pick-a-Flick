@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-social.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
     <link rel="stylesheet" type="text/css" href="assets/css/logon.css">
-
     <!-- Favicon and touch icons -->
     <link rel="shortcut icon" href="assets/ico/favicon.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
@@ -19,9 +18,13 @@
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
-
     <!-- LINK TO FIREBASE GOES HERE -->
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    
+    <style type="text/css">
+
+    </style>
+
 </head>
 
 <body>
@@ -34,64 +37,63 @@
                         <span class="glyphicon glyphicon-film" aria-hidden="true"></span> Pic-A-Flik <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
                     </div>
                 </div>
-                <div class="col-sm-6 col-sm-offset-3">
-                    <div class="form-box">
-                        <div class="form-top">
-                            <div class="form-top-left">
-                                <h3>Login to our site</h3>
-                                <p>Enter your username and password to log on:</p>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-box">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3>Login to our site</h3>
+                                    <p>Enter your username and password to log on:</p>
+                                </div>
+                                <div class="form-top-right">
+                                    <i class="fa fa-key"></i>
+                                </div>
                             </div>
-                            <div class="form-top-right">
-                                <i class="fa fa-key"></i>
+                            <div class="form-bottom">
+                                <form role="form" action="" method="post" class="login-form">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-username">Username</label>
+                                        <input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-password">Password</label>
+                                        <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" required>
+                                    </div>
+                                    <button type="submit" class="btn" id="default-login">Sign in!</button>
+                                </form>
+                                <div class="register">
+                                    <a href="#">Sign up</a>
+                                </div>
+                                <div class="row">
+                                    <h3 class="text-center">...or login with:</h3>
+                                </div>
+                                <div class="row">
+                                    <div class="social-login">
+                                        <div class="social-login-buttons">
+                                            <button class="btn btn-social btn-facebook col-sm-12 col-lg-3" href="#" id="facebook">
+                                            <i class="fa fa-facebook"></i>Facebook
+                                            </button>
+                                            <button class="btn btn-social btn-twitter col-sm-12 col-lg-3" href="#" id="twitter">
+                                            <i class="fa fa-twitter"></i>Twitter
+                                            </button>
+                                            <button class="btn btn-social btn-google col-sm-12 col-lg-3" href="#" id="googleplus">
+                                            <i class="fa fa-google-plus"></i>Google
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-bottom">
-                            <form role="form" action="" method="post" class="login-form">
-                                <div class="form-group">
-                                    <label class="sr-only" for="form-username">Username</label>
-                                    <input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="sr-only" for="form-password">Password</label>
-                                    <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" required>
-                                </div>
-
-                                <button type="submit" class="btn" id="default-login">Sign in!</button>
-
-                            </form>
-                            <div class="register">
-                                <a href="#">Sign up</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-sm-offset-3 social-login">
-                    <h3>...or login with:</h3>
-                    <div class="social-login-buttons">
-                        <a class="btn btn-block btn-social btn-facebook" href="#" id="facebook">
-                            <i class="fa fa-facebook"></i> Sign in with Facebook
-                        </a>
-                        <a class="btn btn-block btn-social btn-twitter" href="#" id="twitter">
-                            <i class="fa fa-twitter"></i> Sign in with Twitter
-                        </a>
-                        <a class="btn btn-block btn-social btn-google" href="#" id="googleplus">
-                            <i class="fa fa-google-plus"></i> Sign in with Google
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     </div>
-
     <!-- Trigger/Open The Modal -->
     <!-- <button id="myBtn">Open Modal</button> -->
-
     <!-- The Modal -->
     <div id="myModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content">
             <div class="modal-header">
@@ -106,13 +108,8 @@
                 <h3>Copyright 2017</h3>
             </div>
         </div>
-
     </div>
-
-
-
     <script type="text/javascript" src="assets/js/default_signon.js"></script>
-
 </body>
 
 </html>

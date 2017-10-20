@@ -99,6 +99,7 @@ $(".search").on("click", function () {
   if (venueBool && genreBool && ratingBool && scoreBool) {
     if (multiSearch) {
       counter = 1;
+      genreChoice = dataDB.genre;
       movieTitle();
     } else {
       var removeData = database.ref().child("data");
@@ -107,6 +108,7 @@ $(".search").on("click", function () {
       titleArray.length = 0;
       $(this).prop("disabled", true);
       // clear();
+      // multiSearch = true;
       firebaseStorage();
     }
   } else {
@@ -135,6 +137,8 @@ function clear() {
   genreBool = false;
   ratingBool = false;
   scoreBool = false;
+  // multiSearch = false;
+  titleArray.length = 0;
   for (var i = 0; i < 3; i++) {
     $("#card" + (i + 1) + " .card-img-top").attr("src", "assets/images/film.png");
     $("#card" + (i + 1) + " #plot").text("");
@@ -168,7 +172,7 @@ function run2() {
 
   for (var i = 0; i < 50; i++) {
     pageNum++;
-    setTimeout(movieTitle, 1000);
+    setTimeout(movieTitle, 1500);
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -218,7 +222,7 @@ $(".card-img-top").on("click", function () {
 
 function movieTitle() {
   console.log("COUNTER: " + counter);
-  if (counter < 4) {
+  if (counter < 3) {
     var random = Math.floor(Math.random() * titleArray.length);
     var title = titleArray[random];
     run(title);
@@ -288,8 +292,10 @@ function run(title) {
         var title2 = title;
         console.log("TITLE2: " + title2);
       }
-      counter++;
-    } else if (counter < 4) {
+      if (counter < 3) {
+        counter++;
+      }
+    } else if (counter < 3) {
       movieTitle();
     } else {
       console.log("DONE");
@@ -304,6 +310,7 @@ function run(title) {
 // Limit amount of searches to 3
 // Make local counters and make global max counter
 // !!!!! Don't forget about disabling search button !!!!!
+// If api doesn't have value pick backup 
 
 // ----- Known Bugs -----
 // If no results match page just stays blank

@@ -16,6 +16,7 @@ var genreBool = false;
 var ratingBool = false;
 var scoreBool = false;
 var multiSearch = false;
+var searches = 0;
 
 // Initialize Firebase
 
@@ -98,15 +99,25 @@ $(".scorePick a").on("click", function () {
 $(".search").on("click", function () {
   if (venueBool && genreBool && ratingBool && scoreBool) {
     if (multiSearch) {
-      counter = 1;
-      genreChoice = dataDB.genre;
-      movieTitle();
+      searches++;
+      if (searches < 3) {
+        counter = 1;
+        genreChoice = dataDB.genre;
+        movieTitle();
+      } else {
+        $(this).prop("disabled", true);
+        console.log("RESET");
+      }
     } else {
       var removeData = database.ref().child("data");
       removeData.remove();
       counter = 1;
       titleArray.length = 0;
-      $(this).prop("disabled", true);
+      if (searches === 3) {
+        $(this).prop("disabled", true);
+        console.log("RESET");
+      }
+      searches++;
       // clear();
       // multiSearch = true;
       firebaseStorage();
@@ -177,7 +188,7 @@ function run2() {
   //   var number = 0;
   // }
 
-  for (var i = 0; i < 50; i++) {
+  for (var i = 0; i < 75; i++) {
     pageNum++;
     setTimeout(movieTitle, 1500);
     var settings = {
@@ -320,7 +331,7 @@ function run(title) {
 // If api doesn't have value pick backup 
 
 // ----- Known Bugs -----
-// If no results match page just stays blank
+// If no results match page just stays blank & usually a bunch of erros in console
 // Duplicate movies will show up
 // If you hit search over and over then it eventually breaks
 // Counter runs too high

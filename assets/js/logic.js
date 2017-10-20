@@ -125,12 +125,6 @@ $(".clear").on("click", function () {
   $("#gen").html("Genre").css("background", "#CC0000").css("border-color", "#CC0000");
   $("#rate").html("Rating").css("background", "#CC0000").css("border-color", "#CC0000");
   $("#score").html("Score").css("background", "#CC0000").css("border-color", "#CC0000");
-  $("#search").on("click", function () {
-    firebaseStorage();
-  });
-  $(".search").on("click", function () {
-    firebaseStorage();
-  });
   $("#c1").text("Pic");
   $("#c2").text("A");
   $("#c3").text("Flik");

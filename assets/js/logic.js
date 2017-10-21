@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // Remove data from database
   var removeData = database.ref().child("data");
   removeData.remove();
   console.log("ready");
@@ -37,7 +38,8 @@ var database = firebase.database();
 var dataDB = database.ref("data");
 var pickDB = database.ref("userPick");
 
-// Grab user input  
+// Grab user input 
+
 $(".venPick a").on("click", function () {
   venueChoice = $(this).text().trim();
   console.log("Venue: " + venueChoice);
@@ -98,6 +100,7 @@ $(".scorePick a").on("click", function () {
 
 $(".search").on("click", function () {
   if (venueBool && genreBool && ratingBool && scoreBool) {
+    // If user searches more than once run program differently (currently not in use)
     if (multiSearch) {
       searches++;
       if (searches < 3) {
@@ -105,6 +108,7 @@ $(".search").on("click", function () {
         genreChoice = dataDB.genre;
         movieTitle();
       } else {
+        // Disable search button after 3rd search
         $(this).prop("disabled", true);
         console.log("RESET");
       }
@@ -113,12 +117,12 @@ $(".search").on("click", function () {
       removeData.remove();
       counter = 1;
       titleArray.length = 0;
+      searches++;
       if (searches === 3) {
+        // Disable search button after 3rd search
         $(this).prop("disabled", true);
         console.log("RESET");
       }
-      searches++;
-      // clear();
       // multiSearch = true;
       firebaseStorage();
     }
@@ -141,7 +145,7 @@ $(".clear").on("click", function () {
   $("#c3").text("Flik");
 });
 
-// Clear function to clear database and displayed results
+// Clear function to clear database & displayed results & reset booleans
 
 function clear() {
   console.log("CLEARED");
@@ -181,12 +185,15 @@ function firebaseStorage() {
 }
 
 function run2() {
+  // Determine if user is staying in or going out
   // if (venueChoice === "Out") {
   //   pageNum = 0;
   //   var number = 19;
   // } else {
   //   var number = 0;
   // }
+
+  // Search for movies and add titles to movie title array
 
   for (var i = 0; i < 75; i++) {
     pageNum++;
@@ -202,9 +209,6 @@ function run2() {
 
     $.ajax(settings).done(function (response2) {
       console.log(response2);
-
-
-      // Grab random movie out of API list and pass it into OMDB API
 
       for (var i = 0; i < 10; i++) {
         var random = Math.floor(Math.random() * 19);
@@ -224,6 +228,8 @@ function run2() {
   }
 }
 
+// When user selects a movie to watch redirect them so they can buy tickets/movie
+
 $(".card-img-top").on("click", function () {
   console.log(this.title);
   var title = this.title;
@@ -237,6 +243,8 @@ $(".card-img-top").on("click", function () {
     choice: title
   });
 });
+
+// Pass random movie titles from array into OMDB API
 
 function movieTitle() {
   console.log("COUNTER: " + counter);
@@ -278,7 +286,7 @@ function run(title) {
     console.log(score);
     console.log(runTime);
 
-    // Format and create numbers to compare
+    // Format and create numbers for comarison
 
     var scoreCompare = score.slice(0, 2);
 
@@ -295,7 +303,7 @@ function run(title) {
     console.log("ScoreCompare: " + scoreCompare);
     console.log("RatingCompare: " + ratingCompare);
 
-    // Determine if rating & score are correct 
+    // Determine if rating & score are correct & if titles are not equal
 
     if (ratingCompare <= ratingChoice && scoreCompare >= scoreChoice && title != title1 && title != title2) {
       $("#card" + (counter) + " .card-img-top").attr("src", imgURL).attr("title", title);

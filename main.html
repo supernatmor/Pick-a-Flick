@@ -5,15 +5,16 @@
     <title>Pick a Flick</title>
     <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
     <<!-- Latest compiled and minified CSS & JS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+            crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="assets/css/style.css">
         <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
         <style type="text/css">
-        #test {
-            background: white;
-            color: black;
-        }
+            #test {
+                background: white;
+                color: black;
+            }
         </style>
 </head>
 
@@ -21,48 +22,77 @@
     <div class="container">
         <div class="row">
             <div class="title">
-                <span class="glyphicon glyphicon-film" aria-hidden="true"></span> Pic-A-Flik <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-film" aria-hidden="true"></span> Pic-A-Flik
+                <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
             </div>
         </div>
         <div class="row content">
             <div id="userInput" class="col-md-3 col-lg-2">
                 <div class="userInput">
-                    
+
                     <div class="dropdown venue">
                         <button class="btn btn-danger dropdown-toggle hvr-grow" id="venue" style="width: 100%" type="button" data-toggle="dropdown">Stay In/Go Out?</button>
                         <ul class="dropdown-menu">
-                            <li class="venPick"><a>In</a></li>
-                            <li class="venPick"><a>Out</a></li>
+                            <li class="venPick">
+                                <a>In</a>
+                            </li>
+                            <li class="venPick">
+                                <a>Out</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="dropdown">
                         <button class="btn btn-danger dropdown-toggle hvr-grow" id="gen" style="width: 100%" type="button" data-toggle="dropdown">Genre</button>
                         <ul class="dropdown-menu">
-                            <li class="genPick"><a>Action</a></li>
-                            <li class="genPick"><a>Comedy</a></li>
-                            <li class="genPick"><a>Horror</a></li>
-                            <li class="genPick"><a>Romance</a></li>
-                            <li class="genPick"><a>Sci-Fi</a></li>
+                            <li class="genPick">
+                                <a>Action</a>
+                            </li>
+                            <li class="genPick">
+                                <a>Comedy</a>
+                            </li>
+                            <li class="genPick">
+                                <a>Horror</a>
+                            </li>
+                            <li class="genPick">
+                                <a>Romance</a>
+                            </li>
+                            <li class="genPick">
+                                <a>Sci-Fi</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="dropdown">
                         <button class="btn btn-danger dropdown-toggle hvr-grow" id="rate" style="width: 100%" type="button" data-toggle="dropdown">Rating</button>
                         <ul class="dropdown-menu">
-                            <li class="ratePick"><a>G</a></li>
-                            <li class="ratePick"><a>PG</a></li>
-                            <li class="ratePick"><a>PG-13</a></li>
-                            <li class="ratePick"><a>R</a></li>
+                            <li class="ratePick">
+                                <a>G</a>
+                            </li>
+                            <li class="ratePick">
+                                <a>PG</a>
+                            </li>
+                            <li class="ratePick">
+                                <a>PG-13</a>
+                            </li>
+                            <li class="ratePick">
+                                <a>R</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="dropdown">
                         <button class="btn btn-danger dropdown-toggle hvr-grow" id="score" style="width: 100%" type="button" data-toggle="dropdown">Score</button>
                         <ul class="dropdown-menu">
-                            <li class="scorePick"><a>50%+</a></li>
-                            <li class="scorePick"><a>75%+</a></li>
-                            <li class="scorePick"><a>90%+</a></li>
+                            <li class="scorePick">
+                                <a>50%+</a>
+                            </li>
+                            <li class="scorePick">
+                                <a>75%+</a>
+                            </li>
+                            <li class="scorePick">
+                                <a>90%+</a>
+                            </li>
                         </ul>
                     </div>
-                    <div class="btn btn-danger search hvr-grow" style="width: 100%" id="search" type="button" >
+                    <div class="btn btn-danger search hvr-grow" style="width: 100%" id="search" type="button">
                         <span class="glyphicon glyphicon-search" aria-bed="true"></span>Search
                     </div>
                     <div class="btn btn-danger clear hvr-grow" style="width: 100%" id="clear" type="button">
@@ -76,7 +106,8 @@
                         <div class="col-md-6 col-lg-4 hvr-grow">
                             <div class="card" id="card1">
                                 <img class="card-img-top mx-auto" src="assets/images/film.png">
-                                <div class="card-body"><span id="c1" class="customText">Pic</span>
+                                <div class="card-body">
+                                    <span id="c1" class="customText">Pic</span>
                                     <p class="card-text" id="plot"></p>
                                     <p class="card-text" id="rating"></p>
                                     <p class="card-text" id="score"></p>
@@ -87,7 +118,8 @@
                         <div class="col-md-6 col-lg-4 hvr-grow">
                             <div class="card" id="card2">
                                 <img class="card-img-top mx-auto" src="assets/images/film.png">
-                                <div class="card-body "><span id="c2" class="customText">A</span>
+                                <div class="card-body ">
+                                    <span id="c2" class="customText">A</span>
                                     <p class="card-text" id="plot"></p>
                                     <p class="card-text" id="rating"></p>
                                     <p class="card-text" id="score"></p>
@@ -98,7 +130,8 @@
                         <div class="col-md-6 col-lg-4 hvr-grow">
                             <div class="card" id="card3">
                                 <img class="card-img-top mx-auto" src="assets/images/film.png">
-                                <div class="card-body "><span id="c3" class="customText">Flik</span>
+                                <div class="card-body ">
+                                    <span id="c3" class="customText">Flik</span>
                                     <p class="card-text" id="plot"></p>
                                     <p class="card-text" id="rating"></p>
                                     <p class="card-text" id="score"></p>

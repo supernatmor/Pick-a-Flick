@@ -2,85 +2,107 @@
 <html>
 
 <head>
-    <title>Pic_A_Flik</title>
-    <!-- Latest compiled and minified CSS & JS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/386cae3db3.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap-social.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style2.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/logon.css">
-    <!-- Favicon and touch icons -->
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <!-- LINK TO FIREBASE GOES HERE -->
-    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
-    
-    <style type="text/css">
-
-    </style>
-
+    <title>Pick a Flick</title>
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+    <<!-- Latest compiled and minified CSS & JS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+        <style type="text/css">
+        #test {
+            background: white;
+            color: black;
+        }
+        </style>
 </head>
 
-<body>
-    <!-- Top content -->
-    <div class="top-content">
-        <div class="inner-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="title">
-                        <span class="glyphicon glyphicon-film" aria-hidden="true"></span> Pic-A-Flik <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+<body id="body" class="animation">
+    <div class="container">
+        <div class="row">
+            <div class="title">
+                <span class="glyphicon glyphicon-film" aria-hidden="true"></span> Pic-A-Flik <span class="glyphicon glyphicon-film" aria-hidden="true"></span>
+            </div>
+        </div>
+        <div class="row content">
+            <div id="userInput" class="col-md-3 col-lg-2">
+                <div class="userInput">
+                    
+                    <div class="dropdown venue">
+                        <button class="btn btn-danger dropdown-toggle hvr-grow" id="venue" style="width: 100%" type="button" data-toggle="dropdown">Stay In/Go Out?</button>
+                        <ul class="dropdown-menu">
+                            <li class="venPick"><a>In</a></li>
+                            <li class="venPick"><a>Out</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-danger dropdown-toggle hvr-grow" id="gen" style="width: 100%" type="button" data-toggle="dropdown">Genre</button>
+                        <ul class="dropdown-menu">
+                            <li class="genPick"><a>Action</a></li>
+                            <li class="genPick"><a>Comedy</a></li>
+                            <li class="genPick"><a>Horror</a></li>
+                            <li class="genPick"><a>Romance</a></li>
+                            <li class="genPick"><a>Sci-Fi</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-danger dropdown-toggle hvr-grow" id="rate" style="width: 100%" type="button" data-toggle="dropdown">Rating</button>
+                        <ul class="dropdown-menu">
+                            <li class="ratePick"><a>G</a></li>
+                            <li class="ratePick"><a>PG</a></li>
+                            <li class="ratePick"><a>PG-13</a></li>
+                            <li class="ratePick"><a>R</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-danger dropdown-toggle hvr-grow" id="score" style="width: 100%" type="button" data-toggle="dropdown">Score</button>
+                        <ul class="dropdown-menu">
+                            <li class="scorePick"><a>50%+</a></li>
+                            <li class="scorePick"><a>75%+</a></li>
+                            <li class="scorePick"><a>90%+</a></li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-danger search hvr-grow" style="width: 100%" id="search" type="button" >
+                        <span class="glyphicon glyphicon-search" aria-bed="true"></span>Search
+                    </button>
+                    <div class="btn btn-danger clear hvr-grow" style="width: 100%" id="clear" type="button">
+                        <span class="glyphicon glyphicon-trash" aria-bed="true"></span>Clear
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-6 col-sm-offset-3">
-                        <div class="form-box">
-                            <div class="form-top">
-                                <div class="form-top-left">
-                                    <h3>Login to our site</h3>
-                                    <p>Enter your username and password to log on:</p>
-                                </div>
-                                <div class="form-top-right">
-                                    <i class="fa fa-key"></i>
+            </div>
+            <div id="outputBox" class="col-md-9 col-lg-10">
+                <div class="outputBox">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-4 hvr-grow">
+                            <div class="card" id="card1">
+                                <img class="card-img-top mx-auto" src="assets/images/film.png">
+                                <div class="card-body"><span id="c1" class="customText">Pic</span>
+                                    <p class="card-text" id="plot"></p>
+                                    <p class="card-text" id="rating"></p>
+                                    <p class="card-text" id="score"></p>
+                                    <p class="card-text" id="length"></p>
                                 </div>
                             </div>
-                            <div class="form-bottom">
-                                <form role="form" action="" method="post" class="login-form">
-                                    <div class="form-group">
-                                        <label class="sr-only" for="form-username">Username</label>
-                                        <input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="form-password">Password</label>
-                                        <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" required>
-                                    </div>
-                                    <button type="submit" class="btn" id="default-login">Sign in!</button>
-                                </form>
-                                <div class="register">
-                                    <a href="#">Sign up</a>
+                        </div>
+                        <div class="col-md-6 col-lg-4 hvr-grow">
+                            <div class="card" id="card2">
+                                <img class="card-img-top mx-auto" src="assets/images/film.png">
+                                <div class="card-body "><span id="c2" class="customText">A</span>
+                                    <p class="card-text" id="plot"></p>
+                                    <p class="card-text" id="rating"></p>
+                                    <p class="card-text" id="score"></p>
+                                    <p class="card-text" id="length"></p>
                                 </div>
-                                <div class="row">
-                                    <h3 class="text-center">...or login with:</h3>
-                                </div>
-                                <div class="row">
-                                    <div class="social-login">
-                                        <div class="social-login-buttons">
-                                            <button class="btn btn-social btn-facebook col-sm-12 col-lg-3" href="#" id="facebook">
-                                            <i class="fa fa-facebook"></i>Facebook
-                                            </button>
-                                            <button class="btn btn-social btn-twitter col-sm-12 col-lg-3" href="#" id="twitter">
-                                            <i class="fa fa-twitter"></i>Twitter
-                                            </button>
-                                            <button class="btn btn-social btn-google col-sm-12 col-lg-3" href="#" id="googleplus">
-                                            <i class="fa fa-google-plus"></i>Google
-                                            </button>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4 hvr-grow">
+                            <div class="card" id="card3">
+                                <img class="card-img-top mx-auto" src="assets/images/film.png">
+                                <div class="card-body "><span id="c3" class="customText">Flik</span>
+                                    <p class="card-text" id="plot"></p>
+                                    <p class="card-text" id="rating"></p>
+                                    <p class="card-text" id="score"></p>
+                                    <p class="card-text" id="length"></p>
                                 </div>
                             </div>
                         </div>
@@ -89,27 +111,8 @@
             </div>
         </div>
     </div>
-    </div>
-    <!-- Trigger/Open The Modal -->
-    <!-- <button id="myBtn">Open Modal</button> -->
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close">&times;</span>
-                <h2>Pic-A-Flick</h2>
-            </div>
-            <div class="modal-body">
-                <p>Thanks for choosing our product. The feature you just attempted to use</p>
-                <p>is slated for a future enhancement and is not yet available. Stay tuned!.</p>
-            </div>
-            <div class="modal-footer">
-                <h3>Copyright 2017</h3>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript" src="assets/js/default_signon.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js "></script>
+    <script src="assets/js/logic.js "></script>
 </body>
 
 </html>
